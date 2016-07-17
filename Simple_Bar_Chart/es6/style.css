@@ -1,0 +1,41 @@
+body{
+	background-color: #99ddff;
+}
+
+div{
+	background-color: #ff99ff;
+	position: absolute;
+	top: 60px;
+	left: 140px;
+	height: 700px;
+	width: 80%;
+	color: green;
+	
+}
+
+#GDP{
+
+	font-size: 4em;	
+}
+
+h5{
+
+	color:blue;
+	position:absolute;
+	top: 610px;
+	left: 89px;
+}
+
+svg{
+	background-color: white;
+	position: relative;
+	height: 470px;
+	width: 86%;
+	top: -30px;
+	left: 82px;
+}
+
+.bar{
+	fill: purple;
+	shape-rendering: crispEdges;
+}
