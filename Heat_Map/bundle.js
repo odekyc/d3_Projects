@@ -59,13 +59,6 @@
 	  var yearFormat = d3.time.format('%Y');
 	  var monthFormat = d3.time.format('%B');
 	
-	  var xAxisScale = d3.time.scale();
-	
-	  var xAxis = d3.svg.axis().orient("bottom").ticks(d3.time.years, 1).tickFormat(yearFormat);
-	
-	  var yAxisScale = d3.scale.linear().range([0, 450]).domain([0, 12]);
-	  var yAxis = d3.svg.axis().orient('left').ticks(12).tickFormat(monthFormat).scale(yAxisScale);
-	
 	  var colorCalibration = ['#4700b3', '#00ace6', '#5cd65c', '#98e698', '#d9ff66', '#ffffcc', '#ffe6b3', '#ffaa80', '#ff7733', '#ff3333', '#990033'];
 	
 	  d3.select('#svg-calibrate').selectAll('rect').data(colorCalibration).enter().append('rect').attr('width', 60).attr('height', 25).attr('x', function (d, i) {
@@ -76,9 +69,17 @@
 	
 	  var heatmap = d3.select('#heatmap');
 	
+	  var xAxisScale = d3.time.scale();
+	
+	  var xAxis = d3.svg.axis().orient("bottom").ticks(26).tickFormat(yearFormat);
+	
+	  var yAxisScale = d3.time.scale().range([0, 420]).domain([1, 12]);
+	  var yAxis = d3.svg.axis().orient('left').ticks(12).tickFormat(monthFormat).outerTickSize(0).scale(yAxisScale);
+	
 	  xAxis.scale(xAxisScale.range([0, 1085]).domain([1753, 2015]));
 	
-	  heatmap.append('g').attr('transform', 'translate(' + 95 + ',' + 455 + ')').attr('class', 'x axis').call(xAxis);
+	  heatmap.append('g').attr('transform', 'translate(' + 95 + ',' + 455 + ')').attr('class', 'x').call(xAxis);
+	  heatmap.append('g').attr('transform', 'translate( 95, 20)').attr('class', 'y').call(yAxis);
 	})();
 
 /***/ },
