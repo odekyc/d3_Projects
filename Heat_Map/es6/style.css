@@ -31,16 +31,16 @@ h5{
 #heatmap{
 	background-color: white;
 	position: relative;
-	height: 440px;
-	width: 1130px;
+	height: 490px;
+	width: 1180px;
 	top: 5px;
-	left: 110px;
+	left: 60px;
 }
 
 #svg-calibrate{
 	background-color: yellow;
 	position: relative;
-	top: 70px;
+	top: 20px;
 	left: 580px;
 
 }
@@ -77,5 +77,18 @@ label{
 .description{
 	position:relative;
 	left: 585px;
-	top: 75px;
+	top: 25px;
 }
+
+.axis path,
+.axis line {
+   fill: none;
+   stroke: black;
+   stroke-width: 1px;
+   shape-rendering: crispEdges;
+}
+
+
+
+
+

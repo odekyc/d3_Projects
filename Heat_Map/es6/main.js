@@ -5,8 +5,8 @@ import {tempData} from "./data";
    var margin = {top:20,right:20,bottom:20,left:25};
    var data=tempData["monthlyVariance"];
 
-   var heatMapWidth=1085/263;
-   var heatMapHeight=400/12;
+   var cellWidth=1085/263;
+   var cellHeight=450/12;
 
    var benchTemp=8.66;
    var yearFormat=d3.time.format('%Y');
@@ -20,7 +20,7 @@ import {tempData} from "./data";
                .tickFormat(yearFormat);
 
     var yAxisScale=d3.scale.linear()
-                   .range([0, 400])
+                   .range([0, 450])
                    .domain([0,12]);
     var yAxis=d3.svg.axis()
                     .orient('left')
@@ -30,6 +30,7 @@ import {tempData} from "./data";
 
   var colorCalibration = ['#4700b3','#00ace6','#5cd65c','#98e698','#d9ff66','#ffffcc','#ffe6b3', '#ffaa80', '#ff7733', '#ff3333','#990033'];
 
+  
 
    d3.select('#svg-calibrate')
       .selectAll('rect').data(colorCalibration).enter()
@@ -43,9 +44,15 @@ import {tempData} from "./data";
         return d;
       });
 
-     d3.select('#heatmap')
-       .append('g')
-       .attr('width', 1085 )
-       .attr('height', 400)
-       .attr('tansform', 'translate('+margin.left+','+margin.top+')');
+      var heatmap= d3.select('#heatmap');
+     
+  
+
+     xAxis.scale(xAxisScale.range([0,1085]).domain([1753, 2015]));
+
+     heatmap.append('g')
+            .attr('transform', 'translate('+95+','+455+')')
+            .attr('class', 'x axis')
+            .call(xAxis);
+
 })();
