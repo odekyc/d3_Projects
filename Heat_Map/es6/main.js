@@ -12,8 +12,21 @@ import {tempData} from "./data";
    var yearFormat=d3.time.format('%Y');
    var monthFormat=d3.time.format('%B');
 
- 
+   var myData=data.map(function(d){
+       var newObj={};
+       newObj["date"]=new Date(d["year"], d["month"]-1, 3);
+       return newObj;
+   });
 
+
+   alert(myData.length);
+
+   var x_domain=d3.extent(myData, function(d){
+         return d.date;
+   });
+
+   
+  
   var colorCalibration = ['#4700b3','#00ace6','#5cd65c','#98e698','#d9ff66','#ffffcc','#ffe6b3', '#ffaa80', '#ff7733', '#ff3333','#990033'];
 
   
@@ -31,33 +44,52 @@ import {tempData} from "./data";
       });
 
       var heatmap= d3.select('#heatmap');
+
      
       var xAxisScale=d3.time.scale();
 
+
    var xAxis=d3.svg.axis()
                .orient("bottom")
-               .ticks(26)
+               .ticks(d3.time.years,10)
                .tickFormat(yearFormat);
 
     var yAxisScale=d3.time.scale()
-                   .range([ 0, 420])
-                   .domain([1, 12]);
+                   .range([ 0, 440])
+                   .domain([new Date(2000, -1,3), new Date(2000,11,3)]);
     var yAxis=d3.svg.axis()
                     .orient('left')
-                    .ticks(12)
+                    .ticks(d3.time.months,1)
                     .tickFormat(monthFormat)
                     .outerTickSize(0)
                     .scale(yAxisScale);
 
-     xAxis.scale(xAxisScale.range([0,1085]).domain([1753, 2015]));
+     xAxis.scale(xAxisScale.range([0,1085]).domain(x_domain));
 
      heatmap.append('g')
             .attr('transform', 'translate('+95+','+455+')')
             .attr('class', 'x')
             .call(xAxis);
+
      heatmap.append('g')
-            .attr('transform', 'translate( 95, 20)')
+            .attr('transform', 'translate( 95, -5)')
             .attr('class', 'y')
             .call(yAxis);
 
+
+     var rects=heatmap.selectAll('rect')
+               .data(data)
+               .enter()
+               .append('rect')
+               .attr('width', cellWidth)
+               .attr('height', cellHeight)
+               .attr('x', function(d){
+               	   var x= cellWidth*(Number(d.year)-1753)+95;
+                   return x;
+               })
+               .attr('y', function(d){
+               	    var y= cellHeight*(Number(d.month-1))+4;
+               	    return y;
+               })
+               .attr('fill', 'yellow');
 })();
