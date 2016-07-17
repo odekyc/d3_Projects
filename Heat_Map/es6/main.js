@@ -12,20 +12,27 @@ import {tempData} from "./data";
    var yearFormat=d3.time.format('%Y');
    var monthFormat=d3.time.format('%B');
 
-   var myData=data.map(function(d){
+   var mydateData=data.map(function(d){
        var newObj={};
        newObj["date"]=new Date(d["year"], d["month"]-1, 3);
        return newObj;
    });
+   
+   var myvalueData=data.map(function(d){
+      return 8.66+Number(d["variance"]);
+   });
 
+   alert(mydateData.length);
 
-   alert(myData.length);
-
-   var x_domain=d3.extent(myData, function(d){
+   var x_domain=d3.extent(mydateData, function(d){
          return d.date;
    });
 
+   var calibr_domain=d3.extent(myvalueData, function(d){
+   	    return d;
+   });
    
+   alert(calibr_domain);
   
   var colorCalibration = ['#4700b3','#00ace6','#5cd65c','#98e698','#d9ff66','#ffffcc','#ffe6b3', '#ffaa80', '#ff7733', '#ff3333','#990033'];
 
@@ -88,8 +95,22 @@ import {tempData} from "./data";
                    return x;
                })
                .attr('y', function(d){
-               	    var y= cellHeight*(Number(d.month-1))+4;
+               	    var y= cellHeight*(Number(d.month-1))+1;
                	    return y;
                })
                .attr('fill', 'yellow');
+
+        rects.transition()
+             .delay(function(d){
+             	return (d.year-1753)*15;
+             })
+             .duration(500)
+             .attrTween('fill', function(d, i, a){
+
+             	var colorIndex=d3.scale.quantize()
+             	    .range([0,1,2,3,4,5,6,7,8,9,10])
+             	    .domain(calibr_domain);
+             	 return d3.interpolate(a, colorCalibration[colorIndex(8.66+Number(d.variance))]);
+             })
+
 })();
