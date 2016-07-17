@@ -28,12 +28,12 @@ h5{
 	left: 89px;
 }
 
-.heatmap{
+#heatmap{
 	background-color: white;
 	position: relative;
-	height: 430px;
+	height: 440px;
 	width: 1130px;
-	top: 20px;
+	top: 5px;
 	left: 110px;
 }
 
@@ -53,13 +53,13 @@ h2{
 
 #firsth5{
 	position: absolute;
-	top: 75px;
+	top: 67px;
 	left: 370px;
 }
 
 #secondh5{
 	position: absolute;
-	top: 100px;
+	top: 82px;
 	left: 450px;
 }
 
