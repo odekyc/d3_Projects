@@ -37,7 +37,7 @@ import {tempData} from "./data";
   
   var colorCalibration = ['#4700b3','#00ace6','#5cd65c','#98e698','#d9ff66','#ffffcc','#ffe6b3', '#ffaa80', '#ff7733', '#ff3333','#990033'];
 
-  
+  var months=['Jan', 'Feb', 'Mar','Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov','Dec'];
 
    d3.select('#svg-calibrate')
       .selectAll('rect').data(colorCalibration).enter()
@@ -85,6 +85,15 @@ import {tempData} from "./data";
             .call(yAxis);
 
 
+     	var tip = d3.tip()
+	  .attr('class', 'd3-tip')
+	  .offset([-10, 0])
+	  .html(function(d) {
+	    return "<strong>Time : </strong> <span style='color:yellow'>" + months[Number(d.month)-1]+"-"+ d.year+ "</span><br /><br/>"+(benchTemp+Number(d.variance))+"&#8451<br /><br />"+ d.variance+"&#8451";
+	  });
+    
+    
+
      var rects=heatmap.selectAll('rect')
                .data(data)
                .enter()
@@ -99,7 +108,16 @@ import {tempData} from "./data";
                	    var y= cellHeight*(Number(d.month-1))+1;
                	    return y;
                })
-               .attr('fill', 'white');
+               .attr('fill', 'white')
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+
+        rects.call(tip);
+
+
+
+	  
+               
 
         rects.transition()
              .delay(function(d){
@@ -114,8 +132,6 @@ import {tempData} from "./data";
              	 return d3.interpolate(a, colorCalibration[colorIndex(8.66+Number(d.variance))]);
              });
 
-             rects.append('title')
-             .text(function(d){
-             	return monthYearFormat(d.date)+' '+d.variance;
-             });
+
+
 })();
