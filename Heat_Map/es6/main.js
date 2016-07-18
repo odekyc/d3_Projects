@@ -11,6 +11,7 @@ import {tempData} from "./data";
    var benchTemp=8.66;
    var yearFormat=d3.time.format('%Y');
    var monthFormat=d3.time.format('%B');
+   var monthYearFormat=d3.time.format('%Y-%m');
 
    var mydateData=data.map(function(d){
        var newObj={};
@@ -19,7 +20,7 @@ import {tempData} from "./data";
    });
    
    var myvalueData=data.map(function(d){
-      return 8.66+Number(d["variance"]);
+      return benchTemp+Number(d["variance"]);
    });
 
    alert(mydateData.length);
@@ -98,7 +99,7 @@ import {tempData} from "./data";
                	    var y= cellHeight*(Number(d.month-1))+1;
                	    return y;
                })
-               .attr('fill', 'yellow');
+               .attr('fill', 'white');
 
         rects.transition()
              .delay(function(d){
@@ -111,6 +112,10 @@ import {tempData} from "./data";
              	    .range([0,1,2,3,4,5,6,7,8,9,10])
              	    .domain(calibr_domain);
              	 return d3.interpolate(a, colorCalibration[colorIndex(8.66+Number(d.variance))]);
-             })
+             });
 
+             rects.append('title')
+             .text(function(d){
+             	return monthYearFormat(d.date)+' '+d.variance;
+             });
 })();

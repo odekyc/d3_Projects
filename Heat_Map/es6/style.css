@@ -1,5 +1,7 @@
 body{
 	background-color: #99ddff;
+	font-family:arial, 'Hiragino Sans GB',Tahoma, Arial, Helvetica, STHeiti;
+	font-size: 14px;
 }
 
 #outer-div{
@@ -53,13 +55,13 @@ h2{
 
 #firsth5{
 	position: absolute;
-	top: 67px;
+	top: 56px;
 	left: 370px;
 }
 
 #secondh5{
 	position: absolute;
-	top: 82px;
+	top: 71px;
 	left: 450px;
 }
 
