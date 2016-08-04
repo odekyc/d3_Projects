@@ -62,7 +62,7 @@ force.on("tick", function() {
         return d.x + "px";
       })
       .style("top", function(d) {
-        return d.y - 3 + "px";
+        return d.y + "px";
       });
 
 });
