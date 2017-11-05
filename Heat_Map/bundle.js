@@ -70,7 +70,7 @@
 	              return benchTemp + Number(d["variance"]);
 	       });
 	
-	       alert(mydateData.length);
+	      
 	
 	       var x_domain = d3.extent(mydateData, function (d) {
 	              return d.date;
@@ -80,7 +80,7 @@
 	              return d;
 	       });
 	
-	       alert(calibr_domain);
+	      
 	
 	       var colorCalibration = ['#4700b3', '#00ace6', '#5cd65c', '#98e698', '#d9ff66', '#ffffcc', '#ffe6b3', '#ffaa80', '#ff7733', '#ff3333', '#990033'];
 	
