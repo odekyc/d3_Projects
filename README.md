@@ -1,3 +1,3 @@
-# d3_Projects
+# D3_Projects
 
-all the d3 Front End Projects I've done 
+all the D3 Front End Projects I've done 
